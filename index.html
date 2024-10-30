@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corrected Picture Frame Calculator</title>
+    <link rel="manifest" href="manifest.json">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -77,6 +78,12 @@
 </div>
 
 <script>
+if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(reg => console.log("Service Worker registered", reg))
+            .catch(err => console.error("Service Worker registration failed", err));
+    }
+
     function calculateDimensions() {
         const A = parseFloat(document.getElementById('pictureWidth').value);
         const B = parseFloat(document.getElementById('pictureHeight').value);
