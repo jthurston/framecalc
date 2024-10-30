@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corrected Picture Frame Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 90%;
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        input, button {
+            margin-top: 12px;
+            padding: 12px;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box; /* Ensures padding is included in width */
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Picture Frame Calculator</h2>
+    <label for="pictureWidth">Picture Width (A)</label>
+    <input type="number" id="pictureWidth" placeholder="Enter width in inches" required>
+
+    <label for="pictureHeight">Picture Height (B)</label>
+    <input type="number" id="pictureHeight" placeholder="Enter height in inches" required>
+
+    <label for="recessDepth">Recess Depth (C)</label>
+    <input type="number" id="recessDepth" placeholder="Enter depth in inches" required>
+
+    <label for="frameWidth">Frame Width (D)</label>
+    <input type="number" id="frameWidth" placeholder="Enter frame width in inches" required>
+
+    <button onclick="calculateDimensions()">Calculate Frame Dimensions</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function calculateDimensions() {
+        const A = parseFloat(document.getElementById('pictureWidth').value);
+        const B = parseFloat(document.getElementById('pictureHeight').value);
+        const C = parseFloat(document.getElementById('recessDepth').value);
+        const D = parseFloat(document.getElementById('frameWidth').value);
+
+        if (isNaN(A) || isNaN(B) || isNaN(C) || isNaN(D)) {
+            document.getElementById('result').innerHTML = "Please enter all values.";
+            return;
+        }
+
+        const innerWidth = A - 2 * C;
+        const innerHeight = B - 2 * C;
+        const outerWidth = innerWidth + 2 * D;
+        const outerHeight = innerHeight + 2 * D;
+
+        document.getElementById('result').innerHTML = `
+            <strong>Results:</strong><br>
+            Inner Frame Dimensions: ${innerWidth.toFixed(2)}" x ${innerHeight.toFixed(2)}"<br>
+            Outer Frame Dimensions: ${outerWidth.toFixed(2)}" x ${outerHeight.toFixed(2)}"
+        `;
+    }
+</script>
+
+</body>
+</html>
